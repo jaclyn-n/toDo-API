@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import todoRouter from "./routes/todo.js";
 import userRouter from "./routes/user.js";
 
@@ -16,6 +17,8 @@ app.use(express.json());
 // use route
 app.use(todoRouter);
 app.use(userRouter);
+app.use(cors());
+
 
 // listen for incoming resquests
 app.listen(3000, () => {
