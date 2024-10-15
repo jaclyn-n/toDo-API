@@ -5,14 +5,21 @@ import {
   getTodos,
   updateTodo,
 } from "../controllers/todo.js";
-import { localUpload, remoteUpload } from "../middlewares/upload.js";
+import {
+  localUpload,
+  remoteUpload,
+} from "../middlewares/upload.js";
 
 // Create a router
 const todoRouter = Router();
 
 // define routes
 
-todoRouter.post("/todos", remoteUpload.single("icon"), addTodo);
+todoRouter.post(
+  "/todos",
+  remoteUpload.single("icon"), 
+  addTodo
+);
 
 todoRouter.get("/todos", getTodos);
 

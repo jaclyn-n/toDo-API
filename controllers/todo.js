@@ -7,7 +7,7 @@ export const addTodo = async (req, res, next) => {
     // validate user input
     const { error, value } = addTodoValidator.validate({
       ...req.body,
-      icon: req.file?.filename
+      icon: req.file?.filename,
     });
     if (error) {
       // if theres an error return, dont forgot the keyword
@@ -25,8 +25,11 @@ export const addTodo = async (req, res, next) => {
 
 export const getTodos = async (req, res, next) => {
   try {
+    const { filter = "{}" } = req.query;
     // fetch todos from database
-    const todos = await TodoModel.find();
+    const todos = await TodoModel.find(JSON.parse(filter))
+      .limit(limit)
+      .skip(skip);
     // return response
     res.status(200).json(todos);
   } catch (error) {
